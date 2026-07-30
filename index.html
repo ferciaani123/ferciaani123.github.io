@@ -1,0 +1,1390 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ani Fercia — Frontend Designer & UI/UX Designer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0c131b;
+      --bg-alt: #121b25;
+      --bg-card: #151f2a;
+      --border: #22303e;
+      --sea: #3fbfae;
+      --sea-dim: #2a7d74;
+      --sun: #ff8b5e;
+      --sun-deep: #e8603c;
+      --text: #e9edf1;
+      --text-muted: #8ea0af;
+      --text-faint: #5b6b78;
+      --radius: 10px;
+      --display: 'Space Grotesk', sans-serif;
+      --body: 'Inter', sans-serif;
+      --mono: 'JetBrains Mono', monospace;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--body);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .wrap {
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 0 32px;
+    }
+
+    ::selection {
+      background: var(--sun);
+      color: #0c131b;
+    }
+
+    /* horizon signature element */
+    .horizon {
+      height: 2px;
+      width: 100%;
+      background: linear-gradient(90deg, var(--sea) 0%, var(--sea) 35%, var(--sun) 70%, var(--sun-deep) 100%);
+      position: relative;
+    }
+
+    .horizon-dot {
+      position: absolute;
+      top: 50%;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--sun);
+      transform: translate(-50%, -50%);
+      box-shadow: 0 0 14px 3px rgba(255, 139, 94, .55);
+    }
+
+    /* nav */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: rgba(12, 19, 27, .82);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 32px;
+      max-width: 1140px;
+      margin: 0 auto;
+    }
+
+    .logo {
+      font-family: var(--mono);
+      font-size: 14px;
+      letter-spacing: .08em;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .logo .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--sun);
+      display: inline-block;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 36px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: var(--mono);
+      font-size: 12.5px;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      transition: color .2s;
+      position: relative;
+    }
+
+    .nav-links a:hover {
+      color: var(--sea);
+    }
+
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+    }
+
+    .nav-toggle span {
+      width: 22px;
+      height: 2px;
+      background: var(--text);
+      display: block;
+    }
+
+    /* hero */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding-top: 90px;
+      padding-bottom: 40px;
+      position: relative;
+    }
+
+    .hero-coord {
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--text-faint);
+      letter-spacing: .08em;
+      margin-bottom: 28px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .hero-coord::before {
+      content: '';
+      width: 20px;
+      height: 1px;
+      background: var(--sea);
+    }
+
+    h1.hero-name {
+      font-family: var(--display);
+      font-weight: 700;
+      font-size: clamp(3rem, 9vw, 7rem);
+      line-height: .95;
+      letter-spacing: -.02em;
+      margin-bottom: 20px;
+    }
+
+    .hero-roles {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 16px;
+      font-family: var(--mono);
+      font-size: 14px;
+      color: var(--sea);
+      margin-bottom: 28px;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+    }
+
+    .hero-roles span:not(:last-child)::after {
+      content: '/';
+      color: var(--text-faint);
+      margin-left: 16px;
+    }
+
+    .hero-desc {
+      max-width: 560px;
+      color: var(--text-muted);
+      font-size: 17px;
+      margin-bottom: 40px;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 70px;
+    }
+
+    .btn {
+      font-family: var(--mono);
+      font-size: 13px;
+      letter-spacing: .04em;
+      padding: 14px 26px;
+      border-radius: 6px;
+      transition: all .25s;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-primary {
+      background: var(--sun);
+      color: #0c131b;
+      font-weight: 500;
+    }
+
+    .btn-primary:hover {
+      background: var(--sun-deep);
+      transform: translateY(-2px);
+    }
+
+    .btn-ghost {
+      border: 1px solid var(--border);
+      color: var(--text);
+    }
+
+    .btn-ghost:hover {
+      border-color: var(--sea);
+      color: var(--sea);
+    }
+
+    .hero .horizon {
+      margin-bottom: 6px;
+    }
+
+    .hero-meta {
+      display: flex;
+      justify-content: space-between;
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--text-faint);
+      letter-spacing: .05em;
+      padding-top: 4px;
+    }
+
+    section {
+      padding: 40px 0;
+      scroll-margin-top: 90px;
+    }
+
+    .eyebrow {
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--sun);
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .eyebrow::before {
+      content: '';
+      width: 24px;
+      height: 1px;
+      background: var(--sun);
+    }
+
+    h2 {
+      font-family: var(--display);
+      font-weight: 600;
+      font-size: clamp(2rem, 4vw, 2.8rem);
+      letter-spacing: -.01em;
+      margin-bottom: 20px;
+    }
+
+    /* about */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1.3fr 1fr;
+      gap: 70px;
+      align-items: start;
+    }
+
+    .about-text p {
+      color: var(--text-muted);
+      font-size: 16px;
+      margin-bottom: 18px;
+      max-width: 520px;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+
+    .stat {
+      background: var(--bg-card);
+      padding: 26px 24px;
+    }
+
+    .stat-num {
+      font-family: var(--display);
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: var(--sea);
+    }
+
+    .stat-label {
+      font-family: var(--mono);
+      font-size: 11.5px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: .05em;
+      margin-top: 6px;
+    }
+
+    /* skills */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+
+    .skill-card {
+      background: var(--bg-card);
+      padding: 28px;
+    }
+
+    .skill-card h3 {
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--sun);
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      margin-bottom: 16px;
+    }
+
+    .chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .chip {
+      font-family: var(--mono);
+      font-size: 12.5px;
+      color: var(--text-muted);
+      border: 1px solid var(--border);
+      padding: 6px 12px;
+      border-radius: 20px;
+      transition: all .2s;
+    }
+
+    .skill-card:hover .chip {
+      border-color: var(--sea);
+    }
+
+    /* experience timeline */
+    .timeline {
+      position: relative;
+      padding-left: 36px;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 5px;
+      top: 6px;
+      bottom: 6px;
+      width: 1px;
+      background: linear-gradient(180deg, var(--sea), var(--sun));
+    }
+
+    .tl-item {
+      position: relative;
+      padding-bottom: 56px;
+    }
+
+    .tl-item:last-child {
+      padding-bottom: 0;
+    }
+
+    .tl-dot {
+      position: absolute;
+      left: -36px;
+      top: 4px;
+      width: 11px;
+      height: 11px;
+      border-radius: 50%;
+      background: var(--bg);
+      border: 2px solid var(--sea);
+    }
+
+    .tl-item.current .tl-dot {
+      background: var(--sun);
+      border-color: var(--sun);
+      box-shadow: 0 0 0 4px rgba(255, 139, 94, .15);
+    }
+
+    .tl-date {
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--text-faint);
+      letter-spacing: .05em;
+      margin-bottom: 6px;
+    }
+
+    .tl-role {
+      font-family: var(--display);
+      font-size: 1.35rem;
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+
+    .tl-company {
+      font-family: var(--body);
+      font-size: 14px;
+      color: var(--sea);
+      margin-bottom: 14px;
+    }
+
+    .tl-item ul {
+      list-style: none;
+      max-width: 640px;
+    }
+
+    .tl-item li {
+      position: relative;
+      padding-left: 18px;
+      color: var(--text-muted);
+      font-size: 15px;
+      margin-bottom: 8px;
+    }
+
+    .tl-item li::before {
+      content: '—';
+      position: absolute;
+      left: 0;
+      color: var(--text-faint);
+    }
+
+    /* projects */
+    .filter-row {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 40px;
+      flex-wrap: wrap;
+    }
+
+    .filter-btn {
+      font-family: var(--mono);
+      font-size: 12px;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+      padding: 9px 18px;
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      cursor: pointer;
+      background: transparent;
+      transition: all .2s;
+    }
+
+    .filter-btn.active,
+    .filter-btn:hover {
+      border-color: var(--sun);
+      color: var(--sun);
+    }
+
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .project-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      transition: border-color .25s, transform .25s;
+    }
+
+    .project-card:hover {
+      border-color: var(--sea);
+      transform: translateY(-4px);
+    }
+
+    .project-body {
+      padding: 26px 30px 30px;
+    }
+
+    .project-media {
+      position: relative;
+      aspect-ratio: 16/10;
+      background: linear-gradient(135deg, var(--bg-alt), var(--bg-card));
+      border-bottom: 1px solid var(--border);
+      overflow: hidden;
+    }
+
+    .project-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top;
+      display: block;
+      transition: transform .4s ease;
+    }
+
+    .project-card:hover .project-media img {
+      transform: scale(1.03);
+    }
+
+    .media-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .media-browser-bar {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 26px;
+      background: var(--bg-alt);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      padding: 0 10px;
+      z-index: 2;
+    }
+
+    .media-browser-bar span {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--border);
+    }
+
+    .media-placeholder .ph-label {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--text-faint);
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+
+    .media-placeholder .ph-icon {
+      width: 34px;
+      height: 34px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, var(--sea), var(--sun));
+      opacity: .55;
+    }
+
+    .project-links {
+      display: flex;
+      gap: 10px;
+      margin-top: 18px;
+      flex-wrap: wrap;
+    }
+
+    .project-link {
+      font-family: var(--mono);
+      font-size: 12px;
+      letter-spacing: .03em;
+      color: var(--sea);
+      border: 1px solid var(--border);
+      padding: 8px 14px;
+      border-radius: 20px;
+      transition: all .2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .project-link:hover {
+      border-color: var(--sea);
+      background: rgba(63, 191, 174, .08);
+    }
+
+    .project-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 16px;
+    }
+
+    .project-tag {
+      font-family: var(--mono);
+      font-size: 10.5px;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      padding: 4px 10px;
+      border-radius: 4px;
+      color: var(--bg);
+    }
+
+    .tag-dev {
+      background: var(--sea);
+    }
+
+    .tag-ux {
+      background: var(--sun);
+    }
+
+    .project-card h3 {
+      font-family: var(--display);
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .project-loc {
+      font-family: var(--mono);
+      font-size: 11.5px;
+      color: var(--text-faint);
+      margin-bottom: 14px;
+    }
+
+    .project-card p {
+      color: var(--text-muted);
+      font-size: 14.5px;
+      margin-bottom: 16px;
+    }
+
+    .stack-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .stack-row span {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--text-faint);
+      border: 1px solid var(--border);
+      padding: 3px 9px;
+      border-radius: 12px;
+    }
+
+    /* education */
+    .edu-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .edu-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px;
+    }
+
+    .edu-date {
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--sea);
+      margin-bottom: 10px;
+    }
+
+    .edu-card h3 {
+      font-family: var(--display);
+      font-size: 1.15rem;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .edu-card p {
+      color: var(--text-muted);
+      font-size: 14px;
+    }
+
+    /* contact / footer */
+    footer {
+      padding: 70px 0 40px;
+    }
+
+    .contact-inner {
+      text-align: center;
+      max-width: 640px;
+      margin: 0 auto;
+    }
+
+    .contact-inner h2 {
+      font-size: clamp(2.2rem, 6vw, 3.4rem);
+    }
+
+    .contact-inner p {
+      color: var(--text-muted);
+      margin-bottom: 40px;
+      font-size: 16px;
+    }
+
+    .contact-links {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 80px;
+    }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: var(--mono);
+      font-size: 11.5px;
+      color: var(--text-faint);
+      flex-wrap: wrap;
+      gap: 10px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity .7s ease, transform .7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media(max-width:1000px) and (min-width:861px) {
+      .project-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media(max-width:860px) {
+      .nav-links {
+        display: none;
+      }
+
+      .nav-toggle {
+        display: flex;
+      }
+
+      .about-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .skills-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .project-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .edu-grid {
+        grid-template-columns: 1fr;
+      }
+
+      section {
+        padding: 56px 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <nav>
+      <div class="logo"><span class="dot"></span>ANI&nbsp;FERCIA</div>
+      <ul class="nav-links">
+        <li><a href="javascript:void(0)" data-scroll="about">About</a></li>
+        <li><a href="javascript:void(0)" data-scroll="skills">Skills</a></li>
+        <li><a href="javascript:void(0)" data-scroll="experience">Experience</a></li>
+        <li><a href="javascript:void(0)" data-scroll="work">Work</a></li>
+        <li><a href="javascript:void(0)" data-scroll="contact">Contact</a></li>
+      </ul>
+      <button class="nav-toggle" id="navToggle"
+        aria-label="Toggle menu"><span></span><span></span><span></span></button>
+    </nav>
+  </header>
+
+  <div class="wrap">
+    <section class="hero">
+      <div class="hero-coord">8.0883° N, 77.5385° E — Kanniyakumari District, India</div>
+      <h1 class="hero-name">Ani Fercia</h1>
+      <div class="hero-roles">
+        <span>Frontend Designer</span>
+        <span>UI/UX Designer</span>
+      </div>
+      <p class="hero-desc">I take a design file the same way the coast here takes a sunrise — and carry it,
+        deliberately, to something people can actually use. 3+ years turning Figma and Adobe XD into responsive,
+        pixel-perfect products for clients across India, Bahrain, and beyond.</p>
+      <div class="hero-cta">
+        <a href="javascript:void(0)" data-scroll="work" class="btn btn-primary">View the work →</a>
+        <a href="javascript:void(0)" data-scroll="contact" class="btn btn-ghost">Get in touch</a>
+      </div>
+      <div class="horizon">
+        <div class="horizon-dot" style="left:72%"></div>
+      </div>
+      <div class="hero-meta">
+        <span>SEA → responsive, structural work</span>
+        <span>SUN → interface, visual craft</span>
+      </div>
+    </section>
+
+    <section id="about" class="reveal">
+      <div class="eyebrow">About</div>
+      <div class="about-grid">
+        <div class="about-text">
+          <h2>Where the design ends<br>and the build begins.</h2>
+          <p>I'm a frontend developer and UI/UX designer based in Kattathurai, Kanniyakumari — the southernmost point of
+            mainland India, where the Arabian Sea, Bay of Bengal, and Indian Ocean meet. It's a strange, useful place to
+            work from: I spend my days at the exact meeting point of two crafts too, translating Figma and Adobe XD
+            files into responsive Angular and WordPress builds that hold up in a real browser.</p>
+          <p>Over the past three years I've shipped 20+ live client projects spanning corporate sites, WooCommerce
+            stores, custom PHP platforms, and association portals — for teams in India and, increasingly, Bahrain. I
+            care about the seam between design and code: the place most handoffs quietly lose fidelity, and where I try
+            hardest not to.</p>
+        </div>
+        <div class="stats">
+          <div class="stat">
+            <div class="stat-num">3+</div>
+            <div class="stat-label">Years experience</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num">20+</div>
+            <div class="stat-label">Live client projects</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num">3</div>
+            <div class="stat-label">Markets — India, Bahrain, Intl.</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num">8</div>
+            <div class="stat-label">Featured case studies</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills" class="reveal">
+      <div class="eyebrow">Toolkit</div>
+      <h2>What I build with</h2>
+      <div class="skills-grid">
+        <div class="skill-card">
+          <h3>Frontend Development</h3>
+          <div class="chip-row">
+            <span class="chip">HTML</span><span class="chip">CSS</span><span class="chip">Tailwind CSS</span><span
+              class="chip">JavaScript</span><span class="chip">jQuery</span><span class="chip">AJAX</span><span
+              class="chip">Angular</span>
+          </div>
+        </div>
+        <div class="skill-card">
+          <h3>Design Tools</h3>
+          <div class="chip-row">
+            <span class="chip">Figma</span><span class="chip">Adobe XD</span><span class="chip">Photoshop</span>
+          </div>
+        </div>
+        <div class="skill-card">
+          <h3>Backend &amp; Database</h3>
+          <div class="chip-row">
+            <span class="chip">PHP</span><span class="chip">MySQL</span>
+          </div>
+        </div>
+        <div class="skill-card">
+          <h3>CMS &amp; SEO</h3>
+          <div class="chip-row">
+            <span class="chip">WordPress</span><span class="chip">SEO Basics</span>
+          </div>
+        </div>
+        <div class="skill-card">
+          <h3>Version Control</h3>
+          <div class="chip-row">
+            <span class="chip">Git</span><span class="chip">GitHub</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="experience" class="reveal">
+      <div class="eyebrow">Experience</div>
+      <h2>Where I've worked</h2>
+      <div class="timeline">
+        <div class="tl-item current">
+          <div class="tl-dot"></div>
+          <div class="tl-date">Feb 2025 — Present</div>
+          <div class="tl-role">Frontend Designer</div>
+          <div class="tl-company">Crayo Tech Business Solutions Pvt Ltd · Trivandrum, Kerala</div>
+          <ul>
+            <li>Design and prototype interfaces in Figma, shaping UI/UX for client projects before they go into build.
+            </li>
+            <li>Develop and customise WordPress websites for clients across India and international markets including
+              Bahrain.</li>
+            <li>Build frontend designs using HTML, CSS, and Bootstrap, translating approved designs into responsive,
+              pixel-perfect pages.</li>
+            <li>Collaborate with design and backend teams to deliver seamless web experiences across all live client
+              projects.</li>
+          </ul>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-date">Apr 2023 — Feb 2025</div>
+          <div class="tl-role">Frontend Developer</div>
+          <div class="tl-company">Softmind Tech Service Pvt Ltd · Kattathurai, Kanyakumari</div>
+          <ul>
+            <li>Worked on an Angular project, building dynamic, interactive interfaces for a live client application.
+            </li>
+            <li>Built frontend designs using HTML, CSS, and Bootstrap, converting Figma and Adobe XD files into
+              responsive, pixel-perfect pages.</li>
+            <li>Worked on UI/UX design using Figma — wireframes and prototypes across multiple client projects.</li>
+            <li>Completed a one-week Value Added Course in Figma at Bethlehem College of Engineering to strengthen UI/UX
+              design fundamentals.</li>
+          </ul>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-date">Aug 2022 — Mar 2023</div>
+          <div class="tl-role">Full Stack Developer Intern</div>
+          <div class="tl-company">Cloverworld Technologies · Nagercoil, Tamil Nadu</div>
+          <ul>
+            <li>Assisted in building full-stack web features with HTML, CSS, JavaScript, and backend technologies.</li>
+            <li>Gained hands-on experience in database management and server-side integration.</li>
+            <li>Participated in agile workflows, code reviews, and daily stand-ups.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="work" class="reveal">
+      <div class="eyebrow">Selected Work</div>
+      <h2>Development &amp; design projects</h2>
+      <div class="filter-row">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="dev">Development</button>
+        <button class="filter-btn" data-filter="ux">UI/UX Design</button>
+      </div>
+      <div class="project-grid" id="projectGrid">
+
+        <div class="project-card" data-cat="dev">
+          <div class="project-media" data-project="mane-kancor">
+            <div class="media-browser-bar"><span></span><span></span><span></span></div>
+            <img src="img/manekancor.png" alt="Mane Kancor project preview — replace with real screenshot">
+          </div>
+          <div class="project-body">
+            <div class="project-top">
+              <h3 style="margin:0">Mane Kancor</h3><span class="project-tag tag-dev">Dev</span>
+            </div>
+            <div class="project-loc">Natural Ingredients Manufacturer · manekancor.com</div>
+            <p>Corporate site for a global natural ingredients and spice extraction manufacturer.</p>
+            <div class="stack-row"><span>WordPress</span><span>CSS3</span><span>Bootstrap</span></div>
+            <div class="project-links"><a href="https://manekancor.com" target="_blank" class="project-link">↗ Visit
+                site</a></div>
+          </div>
+        </div>
+
+        <div class="project-card" data-cat="dev">
+          <div class="project-media" data-project="wellness-with-wafa">
+            <div class="media-browser-bar"><span></span><span></span><span></span></div>
+            <img src="img/wafa.png" alt="Wellness With Wafa project preview — replace with real screenshot">
+          </div>
+          <div class="project-body">
+            <div class="project-top">
+              <h3 style="margin:0">Wellness With Wafa</h3><span class="project-tag tag-dev">Dev</span>
+            </div>
+            <div class="project-loc">Bahrain · wellnesswithwafa.com</div>
+            <p>Bilingual (English/Arabic) WooCommerce platform for a fitness &amp; nutrition coaching brand.
+              Coaching-package pages with multi-currency support, dynamic cart/checkout, and mobile-first testimonial
+              sections.</p>
+            <div class="stack-row"><span>WordPress</span><span>WooCommerce</span><span>CSS3</span></div>
+            <div class="project-links"><a href="https://wellnesswithwafa.com" target="_blank" class="project-link">↗
+                Visit site</a></div>
+          </div>
+        </div>
+
+        <div class="project-card" data-cat="dev">
+          <div class="project-media" data-project="gets">
+            <div class="media-browser-bar"><span></span><span></span><span></span></div>
+            <img src="img/gets.png" alt="GETS project preview — replace with real screenshot">
+          </div>
+          <div class="project-body">
+            <div class="project-top">
+              <h3 style="margin:0">GETS</h3><span class="project-tag tag-dev">Dev</span>
+            </div>
+            <div class="project-loc">France &amp; Philippines · gets-int.com</div>
+            <p>Responsive WordPress site for a global engineering and architectural design firm. Dynamic sections for
+              services, projects, news, and a multi-office contact page with a service-selection inquiry form.</p>
+            <div class="stack-row"><span>WordPress</span><span>CSS3</span><span>Bootstrap</span></div>
+            <div class="project-links"><a href="https://gets-int.com" target="_blank" class="project-link">↗ Visit
+                site</a></div>
+          </div>
+        </div>
+
+        <div class="project-card" data-cat="dev">
+          <div class="project-media" data-project="attoi">
+            <div class="media-browser-bar"><span></span><span></span><span></span></div>
+            <img src="img/attoi.png" alt="ATTOI project preview — replace with real screenshot">
+          </div>
+          <div class="project-body">
+            <div class="project-top">
+              <h3 style="margin:0">ATTOI</h3><span class="project-tag tag-dev">Dev</span>
+            </div>
+            <div class="project-loc">Association of Tourism Trade Organizations India · attoi.org</div>
+            <p>Association website for India's tourism trade organisations, with membership &amp; events.</p>
+            <div class="stack-row"><span>WordPress</span><span>Elementor</span><span>CSS3</span></div>
+            <div class="project-links"><a href="https://attoi.org" target="_blank" class="project-link">↗ Visit
+                site</a></div>
+          </div>
+        </div>
+
+        <div class="project-card" data-cat="dev">
+          <div class="project-media" data-project="wiya-solutions">
+            <div class="media-browser-bar"><span></span><span></span><span></span></div>
+            <img src="img/wiya.png" alt="Wiya Solutions project preview — replace with real screenshot">
+          </div>
+          <div class="project-body">
+            <div class="project-top">
+              <h3 style="margin:0">Wiya Solutions</h3><span class="project-tag tag-dev">Dev</span>
+            </div>
+            <div class="project-loc">Kollam, Kerala · wiyasolutions.com</div>
+            <p>Site for a Kerala-based IT training institute offering career-focused courses.</p>
+            <div class="stack-row"><span>WordPress</span><span>CSS3</span><span>Bootstrap</span></div>
+            <div class="project-links"><a href="https://www.wiyasolutions.com" target="_blank" class="project-link">↗
+                Visit site</a></div>
+          </div>
+        </div>
+
+        <div class="project-card" data-cat="dev">
+          <div class="project-media" data-project="social-vibes">
+            <div class="media-browser-bar"><span></span><span></span><span></span></div>
+            <img src="img/social-vibes.png" alt="Social Vibes project preview — replace with real screenshot">
+          </div>
+          <div class="project-body">
+            <div class="project-top">
+              <h3 style="margin:0">Social Vibes</h3><span class="project-tag tag-dev">Dev</span>
+            </div>
+            <div class="project-loc">Kochi, Kerala · socialvibes.in</div>
+            <p>Site for a Kochi-based branding, social media &amp; digital marketing agency.</p>
+            <div class="stack-row"><span>WordPress</span><span>CSS3</span><span>Bootstrap</span></div>
+            <div class="project-links"><a href="https://socialvibes.in" target="_blank" class="project-link">↗ Visit
+                site</a></div>
+          </div>
+        </div>
+
+        <div class="project-card" data-cat="dev">
+          <div class="project-media" data-project="hammer-india">
+            <div class="media-browser-bar"><span></span><span></span><span></span></div>
+            <img src="img/hammer.png" alt="Hammer India project preview — replace with real screenshot">
+          </div>
+          <div class="project-body">
+            <div class="project-top">
+              <h3 style="margin:0">Hammer India</h3><span class="project-tag tag-dev">Dev</span>
+            </div>
+            <div class="project-loc">Kochi, Kerala · hammerindia.in</div>
+            <p>Site for a Kochi-based branding and creative agency.</p>
+            <div class="stack-row"><span>WordPress</span><span>CSS3</span><span>Bootstrap</span></div>
+            <div class="project-links"><a href="https://hammerindia.in" target="_blank" class="project-link">↗ Visit
+                site</a></div>
+          </div>
+        </div>
+
+        <div class="project-card" data-cat="dev">
+          <div class="project-media" data-project="glowkonnect-dev">
+            <div class="media-browser-bar"><span></span><span></span><span></span></div>
+            <img src="img/glowkonnect.png" alt="Glowkonnect project preview — replace with real screenshot">
+          </div>
+          <div class="project-body">
+            <div class="project-top">
+              <h3 style="margin:0">Glowkonnect</h3><span class="project-tag tag-dev">Dev</span>
+            </div>
+            <div class="project-loc">glowkonnect.com</div>
+            <p>AI-powered beauty & wellness booking marketplace; compare and book salons, spas, and gyms.</p>
+            <div class="stack-row"><span>HTML</span><span>CSS</span><span>Bootstrap</span><span>JavaScript</span></div>
+            <div class="project-links"><a href="https://glowkonnect.com" target="_blank" class="project-link">↗ Visit
+                site</a></div>
+          </div>
+        </div>
+
+        <div class="project-card" data-cat="dev">
+          <div class="project-media" data-project="righcars">
+            <div class="media-browser-bar"><span></span><span></span><span></span></div>
+            <img src="img/rightcars.png" alt="RighCars project preview — replace with real screenshot">
+          </div>
+          <div class="project-body">
+            <div class="project-top">
+              <h3 style="margin:0">RighCars</h3><span class="project-tag tag-dev">Dev</span>
+            </div>
+            <div class="project-loc">Bahrain · Used Car Marketplace</div>
+            <p>Used/new car marketplace for Bahrain with filterable listings, dealer directory, and rentals.</p>
+            <div class="stack-row"><span>HTML</span><span>CSS</span><span>Bootstrap</span><span>JavaScript</span></div>
+            <div class="project-links"><a href="https://righcars.com" target="_blank" class="project-link">↗ Visit
+                site</a></div>
+          </div>
+        </div>
+
+        <div class="project-card" data-cat="dev">
+          <div class="project-media" data-project="utility">
+            <div class="media-browser-bar"><span></span><span></span><span></span></div>
+            <img src="img/utility.png" alt="Utility project preview — replace with real screenshot">
+          </div>
+          <div class="project-body">
+            <div class="project-top">
+              <h3 style="margin:0">Utility</h3><span class="project-tag tag-dev">Dev</span>
+            </div>
+            <div class="project-loc">Bahrain · utility.com.bh</div>
+            <p>Corporate site for a Bahrain MEP contractor showcasing projects and ISO certifications.</p>
+            <div class="stack-row"><span>HTML</span><span>CSS</span><span>Bootstrap</span><span>JavaScript</span></div>
+            <div class="project-links"><a href="https://www.utility.com.bh" target="_blank" class="project-link">↗ Visit
+                site</a></div>
+          </div>
+        </div>
+
+        <div class="project-card" data-cat="dev">
+          <div class="project-media" data-project="macforce-dxb">
+            <div class="media-browser-bar"><span></span><span></span><span></span></div>
+            <img src="img/macforce.png" alt="Macforce DXB project preview — replace with real screenshot">
+          </div>
+          <div class="project-body">
+            <div class="project-top">
+              <h3 style="margin:0">Macforce DXB</h3><span class="project-tag tag-dev">Dev</span>
+            </div>
+            <div class="project-loc">macforcedxb.com</div>
+            <p>Corporate + WooCommerce site for a Dubai electromechanical services and parts supplier.</p>
+            <div class="stack-row"><span>HTML</span><span>CSS</span><span>Bootstrap</span><span>JavaScript</span></div>
+            <div class="project-links"><a href="https://macforcedxb.com" target="_blank" class="project-link">↗ Visit
+                site</a></div>
+          </div>
+        </div>
+
+        <div class="project-card" data-cat="dev">
+          <div class="project-media" data-project="hruniq">
+            <div class="media-browser-bar"><span></span><span></span><span></span></div>
+            <img src="img/hruniq.png" alt="HRUniq project preview — replace with real screenshot">
+          </div>
+          <div class="project-body">
+            <div class="project-top">
+              <h3 style="margin:0">HRUniq</h3><span class="project-tag tag-dev">Dev</span>
+            </div>
+            <div class="project-loc">app.hruniq.com</div>
+            <p>Full HRMS application with an Angular frontend, designed for handling employee and HR workflows in one
+              platform.</p>
+            <div class="stack-row"><span>Angular</span><span>TypeScript</span></div>
+            <div class="project-links"><a href="https://app.hruniq.com/login" target="_blank" class="project-link">↗
+                Visit site</a></div>
+          </div>
+        </div>
+
+        <div class="project-card" data-cat="ux">
+          <div class="project-media" data-project="glowkonnect-ux">
+            <div class="media-browser-bar"><span></span><span></span><span></span></div>
+            <img src="img/glowkonnect-figma.png" alt="GlowKonnect UI/UX preview">
+          </div>
+          <div class="project-body">
+            <div class="project-top">
+              <h3 style="margin:0">GlowKonnect</h3><span class="project-tag tag-ux">UI/UX</span>
+            </div>
+            <div class="project-loc">AI-Powered Beauty &amp; Wellness Marketplace</div>
+            <p>Full UI/UX for a marketplace to compare and book salons, spas, gyms, and wellness services in one place —
+              clean product cards, a "top-rated experts" trust layer, and simple booking entry points.</p>
+            <div class="stack-row"><span>Figma</span><span>UI/UX Design</span></div>
+            <div class="project-links"><a
+                href="https://www.figma.com/proto/rRpl5JyEtPzDCT0GgFQz4Y/GlowKonnect---Website--UI?node-id=4-2286&t=cLlva7LALyeoUIgs-0&scaling=scale-down-width&content-scaling=fixed&page-id=3%3A2184&starting-point-node-id=276%3A679"
+                target="_blank" class="project-link">↗ Figma prototype</a></div>
+          </div>
+        </div>
+
+        <div class="project-card" data-cat="ux">
+          <div class="project-media" data-project="ozone">
+            <div class="media-browser-bar"><span></span><span></span><span></span></div>
+            <img src="img/ozone-figma.png" alt="Ozone Tourism &amp; Travel UI/UX preview">
+          </div>
+          <div class="project-body">
+            <div class="project-top">
+              <h3 style="margin:0">Ozone Tourism &amp; Travel</h3><span class="project-tag tag-ux">UI/UX</span>
+            </div>
+            <div class="project-loc">Travel &amp; Hospitality · Flights, Hotels, Visa &amp; More</div>
+            <p>Visual UI for a one-stop travel booking platform — flights, hotels, visa, bus, holiday packages, forex,
+              and cruise — all under a single tabbed search experience with a clear one-way/round-trip flow.</p>
+            <div class="stack-row"><span>Figma</span><span>UI/UX Design</span></div>
+            <div class="project-links"><a
+                href="https://www.figma.com/proto/wexBYU7e2zH5WqgueAZ5QN/Ozone-Visual-design?node-id=3-3963&p=f&t=uGJVIb3Q81c1ajYg-0&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=3%3A3963"
+                target="_blank" class="project-link">↗ Figma prototype</a></div>
+          </div>
+        </div>
+
+        <div class="project-card" data-cat="ux">
+          <div class="project-media" data-project="tinytootle">
+            <div class="media-browser-bar"><span></span><span></span><span></span></div>
+            <img src="img/tiny.png" alt="Tiny Tootle UI/UX preview">
+          </div>
+          <div class="project-body">
+            <div class="project-top">
+              <h3 style="margin:0">Tiny Tootle</h3><span class="project-tag tag-ux">UI/UX</span>
+            </div>
+            <div class="project-loc">Baby &amp; Kids Essentials · E-commerce</div>
+            <p>Soft, friendly UI/UX for a baby-products storefront — warm imagery, a simple product/about/blog nav, and
+              a gentle brand voice built to feel trustworthy to new parents.</p>
+            <div class="stack-row"><span>Figma</span><span>UI/UX Design</span></div>
+            <div class="project-links"><a
+                href="https://www.figma.com/proto/1fpTXrCLQDuPuv4UEmv5mT/Tinytootle--.EXT-?node-id=76-4267&p=f&t=kGw29YKauGQoyCc7-1&scaling=scale-down-width&content-scaling=fixed&page-id=1%3A7573&starting-point-node-id=76%3A4267"
+                target="_blank" class="project-link">↗ Figma prototype</a></div>
+          </div>
+        </div>
+
+        <div class="project-card" data-cat="ux">
+          <div class="project-media" data-project="le-white">
+            <div class="media-browser-bar"><span></span><span></span><span></span></div>
+            <img src="img/le-white.png" alt="Le White Boutique UI/UX preview">
+          </div>
+          <div class="project-body">
+            <div class="project-top">
+              <h3 style="margin:0">Le White Boutique</h3><span class="project-tag tag-ux">UI/UX</span>
+            </div>
+            <div class="project-loc">Bridal &amp; Couture · E-commerce</div>
+            <p>Luxury bridal-couture storefront UI — arched hero imagery, an appointment-booking flow, and a warm,
+              editorial gold palette built to feel like a boutique, not a template.</p>
+            <div class="stack-row"><span>Figma</span><span>UI/UX Design</span></div>
+            <div class="project-links"><a
+                href="https://www.figma.com/proto/p8cRHgWDg6v3EJDz91bWqA/Le-White--.Ext-?node-id=87-199&p=f&t=pZz3ZzNdtIUYMTII-1&scaling=scale-down-width&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=87%3A199"
+                target="_blank" class="project-link">↗ Figma prototype</a></div>
+          </div>
+        </div>
+
+        <div class="project-card" data-cat="ux">
+          <div class="project-media" data-project="zari">
+            <div class="media-browser-bar"><span></span><span></span><span></span></div>
+            <img src="img/zari.png" alt="Zari — The Thread UI/UX preview">
+          </div>
+          <div class="project-body">
+            <div class="project-top">
+              <h3 style="margin:0">Zari — The Thread</h3><span class="project-tag tag-ux">UI/UX</span>
+            </div>
+            <div class="project-loc">Ethnic Wear &amp; Sarees · E-commerce</div>
+            <p>Ethnic-wear marketplace UI centred on a bold typographic homepage, wishlist/cart/account flows, and
+              occasion-based browsing for sarees and traditional wear.</p>
+            <div class="stack-row"><span>Figma</span><span>UI/UX Design</span></div>
+            <div class="project-links"><a
+                href="https://www.figma.com/proto/uZN1u6GTl0GMAqCYygmWFR/ZARI?node-id=499-45283&viewport=-4322%2C122%2C0.17&t=qDWtnHtifJOCusjF-1&scaling=scale-down-width&content-scaling=fixed&page-id=129%3A1162"
+                target="_blank" class="project-link">↗ Figma prototype</a></div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <section id="education" class="reveal">
+      <div class="eyebrow">Education</div>
+      <h2>Academic background</h2>
+      <div class="edu-grid">
+        <div class="edu-card">
+          <div class="edu-date">2023 — 2025</div>
+          <h3>MBA — HR &amp; Operations</h3>
+          <p>Loyola Institute of Technology and Science, Thovalai , Kanniyakumari Dist., Tamil Nadu, India</p>
+        </div>
+        <div class="edu-card">
+          <div class="edu-date">2019 — 2022</div>
+          <h3>B.Sc. — Physics</h3>
+          <p>Nesamony Memorial Christian College, Marthandam, Kanniyakumari Dist., Tamil Nadu, India</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <footer id="contact" class="reveal">
+    <div class="horizon" style="margin-bottom:0"></div>
+    <div class="wrap">
+      <div class="contact-inner" style="padding-top:50px">
+        <div class="eyebrow" style="justify-content:center">Contact</div>
+        <h2>Let's build something<br>that holds up.</h2>
+        <p>Open to frontend, UI/UX, and WordPress roles and freelance projects — remote or based in Kerala.</p>
+        <div class="contact-links">
+          <a href="tel:+918438584302" class="btn btn-ghost">📞 8438584302</a>
+          <a href="https://linkedin.com/in/anifercia" target="_blank" class="btn btn-ghost">in/anifercia</a>
+          <a href="AniFerciaTL-Resume.pdf" class="btn btn-primary">Download Résumé</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>Ani Fercia T.L — Kattathurai, Kanniyakumari Dist., India</span>
+        <span>Built at 8.0883° N, 77.5385° E</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // mobile nav toggle
+    const navToggle = document.getElementById('navToggle');
+    const navLinks = document.querySelector('.nav-links');
+    navToggle.addEventListener('click', () => {
+      const open = navLinks.style.display === 'flex';
+      navLinks.style.display = open ? 'none' : 'flex';
+      navLinks.style.cssText += open ? '' : 'position:fixed;top:64px;left:0;right:0;flex-direction:column;background:#0c131b;padding:24px 32px;border-bottom:1px solid #22303e;gap:18px;';
+    });
+
+    // explicit smooth-scroll for all in-page nav links (no hash in URL/status bar)
+    document.querySelectorAll('a[data-scroll]').forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const target = document.getElementById(link.dataset.scroll);
+        if (target) {
+          target.scrollIntoView({behavior: 'smooth', block: 'start'});
+          if (navLinks.style.display === 'flex') {
+            navLinks.style.display = 'none';
+          }
+        }
+      });
+    });
+
+    // scroll reveal
+    const revealEls = document.querySelectorAll('.reveal');
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {if (e.isIntersecting) {e.target.classList.add('visible');} });
+    }, {threshold: 0.12});
+    revealEls.forEach(el => io.observe(el));
+
+    // project filter
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const cards = document.querySelectorAll('.project-card');
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const f = btn.dataset.filter;
+        cards.forEach(c => {
+          c.style.display = (f === 'all' || c.dataset.cat.split(' ').includes(f)) ? '' : 'none';
+        });
+      });
+    });
+
+    // horizon dot drifting animation
+    const dot = document.querySelector('.horizon-dot');
+    let pos = 72, dir = 1;
+    setInterval(() => {
+      pos += dir * 0.15;
+      if (pos > 92 || pos < 8) dir *= -1;
+      dot.style.left = pos + '%';
+    }, 60);
+  </script>
+
+</body>
+
+</html>
